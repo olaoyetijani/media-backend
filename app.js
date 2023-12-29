@@ -26,6 +26,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/posts", postsRouter);
 app.use("/user", userRouter);
 
+app.get('/', (req, res) => {
+    res.send('Hello to Media API')
+})
+
 // error handler
 // app.use((err, req, res, next) => {
 //   res.locals.message = err.message;
