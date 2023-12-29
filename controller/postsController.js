@@ -1,23 +1,4 @@
 const postMessage = require("../models/postModel");
-const multer = require("multer");
-const sharp = require("sharp");
-
-const multerStorage = multer.memoryStorage();
-
-const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image")) {
-    cb(null, true);
-  } else {
-    cb("Not an image! Please upload only image", false);
-  }
-};
-
-const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
-});
-
-exports.uploadPostImage = upload.single("selectedFile");
 
 exports.getPosts = async (req, res) => {
   try {
