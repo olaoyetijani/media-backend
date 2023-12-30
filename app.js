@@ -15,28 +15,33 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "Teejay");
 
 app.use(cors());
-app.options('*', cors());
-app.use((req, res, next) => {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://your-frontend.com"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
-    );
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    res.setHeader("Access-Control-Allow-Private-Network", true);
-    //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
-    res.setHeader("Access-Control-Max-Age", 7200);
-  
-    next();
-  });
-  
+app.use(
+  cors({
+    origin: "https://media-backend-xxg4.onrender.com/",
+  })
+);
+app.options("*", cors());
+// app.use((req, res, next) => {
+//     res.setHeader(
+//       "Access-Control-Allow-Origin",
+//       "https://your-frontend.com"
+//     );
+//     res.setHeader(
+//       "Access-Control-Allow-Methods",
+//       "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+//     );
+//     res.setHeader(
+//       "Access-Control-Allow-Headers",
+//       "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+//     );
+//     res.setHeader("Access-Control-Allow-Credentials", true);
+//     res.setHeader("Access-Control-Allow-Private-Network", true);
+//     //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+//     res.setHeader("Access-Control-Max-Age", 7200);
+
+//     next();
+//   });
+
 app.use(logger("dev"));
 
 app.use(express.json({ limit: "10mb" }));
@@ -48,9 +53,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/posts", postsRouter);
 app.use("/user", userRouter);
 
-app.get('/', (req, res) => {
-    res.send('Hello to Media API')
-})
+app.get("/", (req, res) => {
+  res.send("Hello to Media API");
+});
 
 // error handler
 // app.use((err, req, res, next) => {
