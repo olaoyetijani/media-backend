@@ -15,6 +15,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "Teejay");
 
 app.use(cors());
+app.options('*', cors());
 app.use(logger("dev"));
 
 app.use(express.json({ limit: "10mb" }));
