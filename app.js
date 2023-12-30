@@ -17,7 +17,7 @@ app.set("view engine", "Teejay");
 app.use(cors());
 app.use(
   cors({
-    origin: "https://media-backend-xxg4.onrender.com/",
+    origin: "http://localhost:5173/",
   })
 );
 app.options("*", cors());
