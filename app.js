@@ -17,7 +17,9 @@ app.set("view engine", "Teejay");
 app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:5173/",
+    origin: "http://localhost:5173",
+    credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 app.options("*", cors());
