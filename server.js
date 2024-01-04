@@ -5,10 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 
 mongoose
-  .connect(process.env.DATABASE_LOCAL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.DATABASE_LOCAL, {})
   .then(() => console.log("Database connection is successful"))
   .catch((err) => console.log(err.message));
 
