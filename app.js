@@ -14,9 +14,28 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "Teejay");
 
-app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS,PUT, DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Content-Type, X-Auth-Toke, Origin, Authorization"
+  );
+  res.header("Access-Control-Max-Age", 86400);
+  next();
+});
 
-app.options("*", cors());
+const corsOrigin = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionSuccessStatus: 200,
+  preflightContinue: false,
+};
+
+app.use(cors(corsOrigin));
+
+//app.options("*", cors());
 // app.use(
 //   cors({
 //     origin: "http://localhost:5173",
@@ -24,19 +43,6 @@ app.options("*", cors());
 //     optionsSuccessStatus: 200,
 //   })
 // );
-
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "POST, GET, OPTIONS,PUT, DELETE"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, X-Auth-Toke, Origin, Authorization"
-//   );
-//   next();
-// });
 
 app.use(logger("dev"));
 
