@@ -14,19 +14,8 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "Teejay");
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS,PUT, DELETE");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, X-Auth-Toke, Origin, Authorization"
-  );
-  res.header("Access-Control-Max-Age", 86400);
-  next();
-});
-
 const corsOrigin = {
-  origin: "*",
+  origin: "https://media-frontend-drab.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionSuccessStatus: 200,
@@ -34,6 +23,20 @@ const corsOrigin = {
 };
 
 app.use(cors(corsOrigin));
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://media-frontend-drab.vercel.app");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "POST, GET, OPTIONS,PUT, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, X-Auth-Toke, Origin, Authorization"
+  );
+  res.setHeader("Access-Control-Max-Age", 86400);
+  next();
+});
 
 //app.options("*", cors());
 // app.use(
